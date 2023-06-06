@@ -4,13 +4,14 @@ import "./index.css";
 import { nanoid } from "nanoid";
 
 export default function App() {
+  const [isHeld, setIsHeld] = useState(false);
   function randDiceGenerator() {
     let newArray = [];
     for (let i = 0; i < 10; i++) {
       newArray.push({
         value: Math.ceil(Math.random() * 6),
-        isHeld: false,
-        id: nanoid,
+        isHeld: isHeld,
+        id: nanoid(),
       });
     }
     return newArray;
@@ -20,8 +21,25 @@ export default function App() {
     setDiceArray(randDiceGenerator());
   }
 
+  function holdDice(id) {
+    setDiceArray(
+      diceArray.map((die) => {
+        if (die.id === id) {
+          return { ...die, isHeld: !die.isHeld };
+        }
+        return die;
+      })
+    );
+  }
   const dice = diceArray.map((die, i) => {
-    return <Dice key={i} value={die.value} isHeld={die.isHeld} />;
+    return (
+      <Dice
+        key={die.id}
+        value={die.value}
+        holdDice={() => holdDice(die.id)}
+        isHeld={die.isHeld}
+      />
+    );
   });
 
   return (
