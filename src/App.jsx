@@ -6,7 +6,10 @@ export default function App() {
   function randDiceGenerator() {
     let newArray = [];
     for (let i = 0; i < 10; i++) {
-      newArray.push(Math.ceil(Math.random() * 6));
+      newArray.push({
+        value: Math.ceil(Math.random() * 6),
+        isHeld: false,
+      });
     }
     return newArray;
   }
@@ -16,7 +19,7 @@ export default function App() {
   }
 
   const dice = diceArray.map((die, i) => {
-    return <Dice key={i} value={die} />;
+    return <Dice key={i} value={die.value} isHeld={die.isHeld} />;
   });
 
   return (

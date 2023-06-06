@@ -19,6 +19,9 @@ body {
   align-items: center;
   gap: 20px;
 }
+.die-word {
+  color: #fff;
+}
 
 .dice-container {
   display: grid;
