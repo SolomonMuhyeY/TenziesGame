@@ -19,10 +19,6 @@ body {
   align-items: center;
   gap: 20px;
 }
-.die-word {
-  color: #fff;
-}
-
 .dice-container {
   display: grid;
   grid-template: auto auto / repeat(5, 1fr);
@@ -39,7 +35,6 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background-color: white;
 }
 
 .die-num {
@@ -51,5 +46,7 @@ body {
   font-weight: bolder;
   border-radius: 1rem;
   padding: 4px 20px;
+  margin: auto;
   margin-top: 2rem;
+  background-color: lightgreen;
 }

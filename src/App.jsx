@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Dice from "./components/Dice";
 import "./index.css";
+import { nanoid } from "nanoid";
 
 export default function App() {
   function randDiceGenerator() {
@@ -9,6 +10,7 @@ export default function App() {
       newArray.push({
         value: Math.ceil(Math.random() * 6),
         isHeld: false,
+        id: nanoid,
       });
     }
     return newArray;
