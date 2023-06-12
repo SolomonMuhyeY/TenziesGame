@@ -44,10 +44,12 @@ export default function App() {
 
   return (
     <div className='App'>
-      <div className='dice-container'>{dice}</div>
-      <button onClick={setNewValue} className='roll-btn'>
-        Roll
-      </button>
+      <div className='container'>
+        <div className='dice-container'>{dice}</div>
+        <button onClick={setNewValue} className='roll-btn'>
+          Roll
+        </button>
+      </div>
     </div>
   );
 }
