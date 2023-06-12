@@ -4,15 +4,27 @@ import "./index.css";
 import { nanoid } from "nanoid";
 
 export default function App() {
-  const [isHeld, setIsHeld] = useState(false);
   function randDiceGenerator() {
     return {
       value: Math.ceil(Math.random() * 6),
-      isHeld: isHeld,
+      isHeld: false,
       id: nanoid(),
     };
   }
+  const [tenzies, setTenzies] = useState(false);
   const [diceArray, setDiceArray] = useState(allFirstDice());
+
+  React.useEffect(() => {
+    const allHeld = diceArray.every((die) => die.isHeld);
+    // checking if all the values are similar with the first value
+    const firstValue = diceArray[0].value;
+    const allSameValue = diceArray.every((die) => die.value === firstValue);
+    if (allHeld && allSameValue) {
+      setTenzies(true);
+      alert("You Won!");
+    }
+  }, [diceArray]);
+
   function rollDice() {
     setDiceArray((oldDice) =>
       oldDice.map((die) => {
@@ -24,11 +36,7 @@ export default function App() {
   function allFirstDice() {
     const newDice = [];
     for (let i = 0; i < 10; i++) {
-      newDice.push({
-        value: Math.ceil(Math.random() * 6),
-        isHeld: isHeld,
-        id: nanoid(),
-      });
+      newDice.push(randDiceGenerator());
     }
     return newDice;
   }
