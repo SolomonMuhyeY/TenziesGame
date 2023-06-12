@@ -6,21 +6,32 @@ import { nanoid } from "nanoid";
 export default function App() {
   const [isHeld, setIsHeld] = useState(false);
   function randDiceGenerator() {
-    let newArray = [];
+    return {
+      value: Math.ceil(Math.random() * 6),
+      isHeld: isHeld,
+      id: nanoid(),
+    };
+  }
+  const [diceArray, setDiceArray] = useState(allFirstDice());
+  function rollDice() {
+    setDiceArray((oldDice) =>
+      oldDice.map((die) => {
+        return die.isHeld ? die : randDiceGenerator();
+      })
+    );
+  }
+
+  function allFirstDice() {
+    const newDice = [];
     for (let i = 0; i < 10; i++) {
-      newArray.push({
+      newDice.push({
         value: Math.ceil(Math.random() * 6),
         isHeld: isHeld,
         id: nanoid(),
       });
     }
-    return newArray;
+    return newDice;
   }
-  const [diceArray, setDiceArray] = useState(randDiceGenerator());
-  function setNewValue() {
-    setDiceArray(randDiceGenerator());
-  }
-
   function holdDice(id) {
     setDiceArray(
       diceArray.map((die) => {
@@ -31,7 +42,7 @@ export default function App() {
       })
     );
   }
-  const dice = diceArray.map((die, i) => {
+  const dice = diceArray.map((die) => {
     return (
       <Dice
         key={die.id}
@@ -46,7 +57,7 @@ export default function App() {
     <div className='App'>
       <div className='container'>
         <div className='dice-container'>{dice}</div>
-        <button onClick={setNewValue} className='roll-btn'>
+        <button onClick={rollDice} className='roll-btn'>
           Roll
         </button>
       </div>

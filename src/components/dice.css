@@ -49,4 +49,8 @@ body {
   margin: auto;
   margin-top: 2rem;
   background-color: lightgreen;
+  cursor: pointer;
+}
+.roll-btn:focus {
+  outline: none;
 }
